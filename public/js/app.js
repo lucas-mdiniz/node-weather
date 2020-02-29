@@ -13,18 +13,16 @@ weatherForm.addEventListener('submit', e => {
   forecastUi.innerText = '';
   fetchForecastErrorUi.innerText = '';
 
-  fetch(`http://localhost:5000/weather?address=${addressInput.value}`).then(
-    response => {
-      response.json().then(data => {
-        if (data.error) {
-          fetchForecastErrorUi.innerText = data.error;
-        } else {
-          locationUi.innerText = data.location;
-          forecastUi.innerText = data.forecast;
-        }
+  fetch(`/weather?address=${addressInput.value}`).then(response => {
+    response.json().then(data => {
+      if (data.error) {
+        fetchForecastErrorUi.innerText = data.error;
+      } else {
+        locationUi.innerText = data.location;
+        forecastUi.innerText = data.forecast;
+      }
 
-        loadingUi.innerText = '';
-      });
-    }
-  );
+      loadingUi.innerText = '';
+    });
+  });
 });
